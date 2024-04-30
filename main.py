@@ -44,8 +44,8 @@ def playerRemove(playerName, playerPosition):
         print(f"An error occurred: {e}")
     return -1
 
-def positionFinder(playerPostion):
-    playerPosition = str(playerPostion)
+def positionFinder(playerPosition):
+    playerPosition = str(playerPosition)
     print(playerPosition)
     if playerPosition == "a":
         return "Striker"
@@ -76,24 +76,17 @@ def editList(file_path):
     for row_idx, row in enumerate(data_list, start=1):
         print(f"{row_idx}. {row}")
 
-    while True:
-        action = input("\nEnter 'a' to add a row, 'r' to remove a row, 'q' to quit: ").lower()
-
-        if action == 'a':
-            new_row = input("Enter the new row (name, value1, value2, value3): ").split(',')
-            data_list.append(new_row)
-        elif action == 'r':
-            row_to_remove = int(input("Enter the index of the row to remove: ")) - 1
-            if 0 <= row_to_remove < len(data_list):
-                del data_list[row_to_remove]
-            else:
-                print("Invalid index.")
-        elif action == 'q':
-            saveList(file_path, data_list)
-            print("List saved. Exiting.")
-            break
-        else:
-            print("Invalid action. Please try again.")
+def WeightedScores():
+    print("poo")
+def ChangeData(playerName, playerPosition):
+    if playerName  in file_path and playerPosition  in file_path:
+        newlistlength = listLength(playerPosition)
+        counter = 0
+        newlistlength -= newlistlength
+        if playerPosition == "Goalkeeper":
+            for x in range(newlistlength):
+                finder = input(letters[x] + ") Do you want to change " + goalkeeperArrNaming[x] + "?")
+                if finder ==
 
 file_path = "Data.txt"
 data_list = readList(file_path)
@@ -109,6 +102,7 @@ strikerArrWeighting =  [0.25, 0.25, 0.15, 0.1, 0.1, 0.1, 0.05, 0.05, 0.05, -0.1]
 midfielderArrWeighting =  [0.15, 0.3, 0.1, 0.1, 0.05, 0.1, 0.05, 0.2, -0.05]
 defenderArrWeighting =  [0.25, 0.25, 0.15, 0.1, 0.15, 0.15, -0.05]
 goalkeeperArrWeighting =  [0.4, 0.3, -0.15, 0.2, 0.2, 0.2, -0.15]
+letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]
 
 while True:
     userdecision1 = input("What would you like to do? \na) Add a new player \nc) Change player data \nf) Find best player for position \nr) remove player from list \ns) Save and Exit \n==> ")
@@ -129,7 +123,12 @@ while True:
         else:
             print("Something went wrong! Try again.")
     if userdecision1 == "c":
-        print("no!")
+        playerAppend = input("Enter the name of the player you wish to add: ")
+        playerPosition = str(input("Enter their position \na) Striker \nb) Midfielder \nc) Defender \nd) Goalkeeper \n ==> "))
+        playerPosition = playerPosition.lower()
+        playerPosition = positionFinder(playerPosition)
+        playerAppend = playerAppend.upper()
+        ChangeData(playerAppend, playerPosition)
     if userdecision1 == "r":
         playerAppend = input("Enter the name of the player you wish to remove: ")
         playerAppend = playerAppend.upper()
@@ -141,7 +140,7 @@ while True:
             del data_list[row_to_remove]
             saveList(file_path, data_list)
         else:
-            print("Invalid index.")
+            print("Player not found!")
     if userdecision1 == "s":
         saveList(file_path, data_list)
         print("List saved. Exiting.")
